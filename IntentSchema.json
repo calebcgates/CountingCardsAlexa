@@ -1,0 +1,220 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "count",
+      "samples": [
+        "{numberCount}",
+        "the count is {numberCount}"
+      ],
+      "slots": [
+        {
+          "name": "numberCount",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "{numberCount}",
+            "the count is {numberCount}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "deal",
+      "samples": [
+        "deal"
+      ],
+      "slots": []
+    },
+    {
+      "name": "NewGame",
+      "samples": [
+        "Start New Game",
+        "New Game",
+        "Let's Go",
+        "Start",
+        "Begin",
+        "Start on {gameDifficulty}",
+        "how many decks",
+        "use {numberOfDecks} decks",
+        "Start on {gameDifficulty} with {numberOfDecks} decks",
+        "{gameDifficulty} with {numberOfDecks} decks"
+      ],
+      "slots": [
+        {
+          "name": "gameDifficulty",
+          "type": "difficulty_levels",
+          "samples": [
+            "{gameDifficulty}",
+            "play on {gameDifficulty}"
+          ]
+        },
+        {
+          "name": "numberOfDecks",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "{numberOfDecks}",
+            "use {numberOfDecks} decks",
+            "use {numberOfDecks}"
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "difficulty_levels",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "easy",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "medium",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "hard",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "veterin",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "beginner",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "difficult",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-count.IntentSlot-numberCount",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What is the count"
+        },
+        {
+          "type": "PlainText",
+          "value": "do you know the count"
+        },
+        {
+          "type": "PlainText",
+          "value": "tell me the count"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-NewGame.IntentSlot-gameDifficulty",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What difficulty would you like to play on"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-NewGame.IntentSlot-numberOfDecks",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "How many decks should I shuffle"
+        },
+        {
+          "type": "PlainText",
+          "value": "how many card decks should I use"
+        },
+        {
+          "type": "PlainText",
+          "value": "how many decks"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "count",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "numberCount",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-count.IntentSlot-numberCount"
+            }
+          }
+        ]
+      },
+      {
+        "name": "NewGame",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "gameDifficulty",
+            "type": "difficulty_levels",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-NewGame.IntentSlot-gameDifficulty"
+            }
+          },
+          {
+            "name": "numberOfDecks",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-NewGame.IntentSlot-numberOfDecks"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
